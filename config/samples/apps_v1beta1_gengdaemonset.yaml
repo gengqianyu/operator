@@ -1,0 +1,13 @@
+apiVersion: apps.gengqianyu.io/v1beta1
+kind: GengDaemonset
+metadata:
+  labels:
+    app.kubernetes.io/name: gengdaemonset
+    app.kubernetes.io/instance: gengdaemonset-sample
+    app.kubernetes.io/part-of: daemon-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: daemon-operator
+  name: gengdaemonset-sample
+spec:
+  image: nginx
+  # TODO(user): Add fields here

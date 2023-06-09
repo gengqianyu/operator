@@ -1,0 +1,54 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.3
+  creationTimestamp: null
+  name: gengdaemonsets.apps.gengqianyu.io
+spec:
+  group: apps.gengqianyu.io
+  names:
+    kind: GengDaemonset
+    listKind: GengDaemonsetList
+    plural: gengdaemonsets
+    singular: gengdaemonset
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: GengDaemonset is the Schema for the gengdaemonsets API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: GengDaemonsetSpec defines the desired state of GengDaemonset
+            properties:
+              image:
+                description: 修改 Foo 属性为 Image 注意 json tag 也要修改，我们要实现一个简单的 daemonset
+                  的 operator 。
+                type: string
+            type: object
+          status:
+            description: GengDaemonsetStatus defines the observed state of GengDaemonset
+            properties:
+              availableReplicas:
+                description: 我们在 status 定义一个可用副本数的属性
+                type: integer
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
