@@ -93,7 +93,9 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 			panic(err)
 		}
 	}
-	//测试 git rebase on origin myfeature 0
+
+	//测试 git rebase on origin myfeature 1
+
 	return ctrl.Result{}, nil
 }
 
