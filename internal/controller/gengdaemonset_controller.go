@@ -93,7 +93,6 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 			panic(err)
 		}
 	}
-
 	return ctrl.Result{}, nil
 }
 
