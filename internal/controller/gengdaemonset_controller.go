@@ -99,6 +99,7 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//测试 git rebase on origin myfeature 0
 =======
 
@@ -116,6 +117,8 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 =======
 =======
 >>>>>>> 114a3bd (test)
+=======
+>>>>>>> e9a2ec6 (555)
 	//测试 git rebase on origin myfeature 6666
 =======
 =======
@@ -129,7 +132,13 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 	//测试 git rebase on origin myfeature 6666
 >>>>>>> 78116fd (cao)
 >>>>>>> bdbc926 (0000)
+<<<<<<< HEAD
 >>>>>>> cc7e606 (0000)
+=======
+=======
+	//测试 git rebase on origin myfeature 6666
+>>>>>>> dabd30b (555)
+>>>>>>> e9a2ec6 (555)
 	return ctrl.Result{}, nil
 }
 
