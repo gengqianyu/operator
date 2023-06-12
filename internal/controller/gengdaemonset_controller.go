@@ -94,7 +94,7 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 		}
 	}
 
-	//测试 git rebase on origin myfeature 6666
+	//测试 git rebase on origin myfeature 1
 	return ctrl.Result{}, nil
 }
 
