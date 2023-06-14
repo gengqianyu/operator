@@ -9,6 +9,8 @@ COPY go.mod go.mod
 COPY go.sum go.sum
 # cache deps before building and copying source so that we don't need to re-download as much
 # and so that source changes don't invalidate our downloaded layer
+# 为 go 添加镜像仓库，不然根本下载不下来 go 依赖包
+RUN go env -w GOPROXY=https://goproxy.cn,direct
 RUN go mod download
 
 # Copy the go source
