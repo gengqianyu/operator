@@ -40,6 +40,8 @@ type GengDaemonsetStatus struct {
 	// Important: Run "make" to regenerate code after modifying this file
 }
 
+// 这些注释标签，kubebuilder 在生成 CRD 的时候，根据这些标签可以生成一些 CRD 的属性，
+// 比如定义一个+kubebuilder:scope=Namespace/Cluster 标签就是告诉 kubebuilder 你帮我生成的这个 GengDaemonset crd 对象，它是 namespace 级别的还是 cluster 集群级别的。
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
