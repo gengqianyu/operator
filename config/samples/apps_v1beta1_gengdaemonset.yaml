@@ -9,5 +9,5 @@ metadata:
     app.kubernetes.io/created-by: daemon-operator
   name: gengdaemonset-sample
 spec:
-  image: nginx
+  image:
   # TODO(user): Add fields here
