@@ -30,6 +30,7 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} go build -a -o ma
 FROM gcr.lank8s.cn/distroless/static:nonroot
 WORKDIR /
 COPY --from=builder /workspace/manager .
+# 用户切换
 USER 65532:65532
 
 ENTRYPOINT ["/manager"]
