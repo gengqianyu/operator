@@ -20,6 +20,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	v1 "k8s.io/api/core/v1"
 	v12 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -52,6 +53,7 @@ type GengDaemonsetReconciler struct {
 func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 	// TODO(user): your logic here
+	// 实例化一个 GengDaemonset 结构体指针
 	gengDsp := &appsv1beta1.GengDaemonset{}
 	// 从 request 中去接收一个 GengDaemonset 对象
 	if err := r.Client.Get(ctx, req.NamespacedName, gengDsp); err != nil {
@@ -61,6 +63,7 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 	if gengDsp.Spec.Image == "" {
 		panic(errors.New("GengDaemonset.spec.iamge 不能为空"))
 	}
+	// 实例化一个 NodeList 指针
 	nlp := &v1.NodeList{}
 	//获取所有 pod
 	if err := r.Client.List(ctx, nlp); err != nil {
