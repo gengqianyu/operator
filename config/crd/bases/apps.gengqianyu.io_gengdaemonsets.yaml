@@ -16,39 +16,35 @@ spec:
   scope: Namespaced
   versions:
   - name: v1beta1
+    served: true
+    storage: true
     schema:
       openAPIV3Schema:
-        description: GengDaemonset is the Schema for the gengdaemonsets API
+        description: GengDaemonset 是 gengdaemonsets API 的 Schema
+        type: object
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: 'APIVersion 定义了对象的这种表示形式的版本化模式。服务器应将已识别的架构转换为最新的内部值，并且可以拒绝无法识别的值。更多信息： https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: 'Kind 是一个字符串值，表示此对象表示的 REST 资源。服务器可能会从客户端提交请求的终端节点推断出这一点。无法更新。在 CamelCase 中。更多信息： https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
             type: string
           metadata:
             type: object
           spec:
-            description: GengDaemonsetSpec defines the desired state of GengDaemonset
+            type: object
+            description: GengDaemonsetSpec 定义 GengDaemonset 的期望状态
             properties:
               image:
                 description: 修改 Foo 属性为 Image 注意 json tag 也要修改，我们要实现一个简单的 daemonset
                   的 operator 。
                 type: string
-            type: object
           status:
-            description: GengDaemonsetStatus defines the observed state of GengDaemonset
+            type: object
+            description: GengDaemonsetStatus 定义 GengDaemonset 的观察状态
             properties:
               availableReplicas:
                 description: 我们在 status 定义一个可用副本数的属性
                 type: integer
-            type: object
-        type: object
-    served: true
-    storage: true
     subresources:
       status: {}

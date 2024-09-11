@@ -1,17 +1,13 @@
 resources:
-# All RBAC will be applied under this service account in
-# the deployment namespace. You may comment out this resource
-# if your manager will use a service account that exists at
-# runtime. Be sure to update RoleBinding and ClusterRoleBinding
-# subjects if changing service account names.
+# 所有 RBAC 都将应用于 deployment 声明的命名空间中的此服务帐户下。
+# 如果您的 manager 将使用运行时存在的服务帐户，则可以注释掉此资源。
+# 如果更改服务帐户名称，请务必更新 RoleBinding 和 ClusterRoleBinding 主题。
 - service_account.yaml
 - role.yaml
 - role_binding.yaml
 - leader_election_role.yaml
 - leader_election_role_binding.yaml
-# Comment the following 4 lines if you want to disable
-# the auth proxy (https://github.com/brancz/kube-rbac-proxy)
-# which protects your /metrics endpoint.
+# 如果您想禁用保护 /metrics 端点的 auth 代理 （https://github.com/brancz/kube-rbac-proxy），请注释以下 4 行。
 - auth_proxy_service.yaml
 - auth_proxy_role.yaml
 - auth_proxy_role_binding.yaml
