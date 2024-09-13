@@ -52,7 +52,6 @@ type GengDaemonsetReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.14.4/pkg/reconcile
 func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
-	// TODO(user): your logic here
 	// 实例化一个 GengDaemonset 结构体指针
 	gengDsp := &appsv1beta1.GengDaemonset{}
 	// 从 request 中去接收一个 GengDaemonset 对象

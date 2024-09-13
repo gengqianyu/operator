@@ -37,15 +37,28 @@ import (
 )
 
 var (
+	// Scheme 指的是一种提供了 Kinds 与对应 Go 类型映射的机制。
+	// 它能够实现给定 Go 类型就知道其 GVK（Group、Version、Kind），
+	// 给定 GVK 就知道其对应的 Go 类型
 	scheme   = runtime.NewScheme()
 	setupLog = ctrl.Log.WithName("setup")
 )
 
 func init() {
-	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
+	// 在 scheme 中注册 GengDaemonset 类型的序列化和反序列化规则。
+	// 这样在创建或读取 GengDaemonset 类型的对象时，GORM 就知道如何处理它们了。
+	utilruntime.Must(
+		// clientgoscheme 是 Kubernetes 提供的一个包，它包含了所有内置资源类型的序列化和反序列化逻辑。
+		// 通过调用 AddToScheme 方法，将这些内置资源类型的序列化规则 添加到 schem 中，
+		// 这样在创建或读取这些资源时，GORM 就知道如何处理它们了。
+		clientgoscheme.AddToScheme(scheme), // 将 k8s 内置资源类型的序列化规则 添加到 scheme 中
+	)
 
-	utilruntime.Must(appsv1beta1.AddToScheme(scheme))
+	utilruntime.Must(
+		appsv1beta1.AddToScheme(scheme), // 将 GengDaemonset 类型的序列化规则 添加到 scheme 中
+	)
 	//+kubebuilder:scaffold:scheme
+	// 这样完成以上两步后，scheme 中就包含了 GengDaemonset 类型 和 k8s 内置类型的序列化和反序列化规则了。
 }
 
 func main() {
