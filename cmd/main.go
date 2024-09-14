@@ -55,6 +55,8 @@ func init() {
 	)
 
 	utilruntime.Must(
+		// 结合 api/v1beta1/gengdaemonset_types.go 中的 init 函数就明白了，注册的流程。
+
 		appsv1beta1.AddToScheme(scheme), // 将 GengDaemonset 类型的序列化规则 添加到 scheme 中
 	)
 	//+kubebuilder:scaffold:scheme
@@ -89,6 +91,10 @@ func main() {
 	ctrl.SetLogger(zap.New(zap.UseFlagOptions(&opts)))
 
 	// 创建一个新的控制器管理器实例，并配置其选项
+	// Manager 具有 3 个职责：
+	// 负责运行所有的 Controllers；
+	// 初始化共享 caches，包含 listAndWatch 功能；
+	// 初始化 clients 用于与 Api Server 通信。
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:                 scheme,
 		MetricsBindAddress:     metricsAddr,

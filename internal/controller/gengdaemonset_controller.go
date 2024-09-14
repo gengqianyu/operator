@@ -53,37 +53,37 @@ type GengDaemonsetReconciler struct {
 func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 	// 实例化一个 GengDaemonset 结构体指针
-	gengDsp := &appsv1beta1.GengDaemonset{}
-	// 从 request 中去接收一个 GengDaemonset 对象
-	if err := r.Client.Get(ctx, req.NamespacedName, gengDsp); err != nil {
+	var gd appsv1beta1.GengDaemonset
+	// 根据 req.NamespacedName 从 cache 中去获取一个 GengDaemonset gvk，并把 gvk 转换成 GengDaemonset gvr 实例。
+	if err := r.Client.Get(ctx, req.NamespacedName, &gd); err != nil {
 		panic(err)
 	}
 	// 如果这个 image 存在，我就在每一个 node 节点上，创建一个 pod
-	if gengDsp.Spec.Image == "" {
+	if gd.Spec.Image == "" {
 		panic(errors.New("GengDaemonset.spec.iamge 不能为空"))
 	}
 	// 实例化一个 NodeList 指针
-	nlp := &v1.NodeList{}
+	var nodeList v1.NodeList
 	//获取所有 pod
-	if err := r.Client.List(ctx, nlp); err != nil {
+	if err := r.Client.List(ctx, &nodeList); err != nil {
 		panic(err)
 	}
 	// 遍历所有 node ，在 node 上启动一个 pod
-	for _, n := range nlp.Items {
+	for _, n := range nodeList.Items {
 		//初始化 pod 对象
-		pp := &v1.Pod{
+		pod := &v1.Pod{
 			TypeMeta: v12.TypeMeta{
 				APIVersion: "v1",
 				Kind:       "pod",
 			},
 			ObjectMeta: v12.ObjectMeta{
 				GenerateName: fmt.Sprintf("%s-", n.Name),
-				Namespace:    gengDsp.Namespace,
+				Namespace:    gd.Namespace,
 			},
 			Spec: v1.PodSpec{
 				Containers: []v1.Container{
 					{
-						Image: gengDsp.Spec.Image,
+						Image: gd.Spec.Image,
 						Name:  "gds-test-container",
 					},
 				},
@@ -91,7 +91,7 @@ func (r *GengDaemonsetReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 			},
 		}
 		// 创建 pod 对象
-		if err := r.Client.Create(ctx, pp); err != nil {
+		if err := r.Client.Create(ctx, pod); err != nil {
 			panic(err)
 		}
 	}

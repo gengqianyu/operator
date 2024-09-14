@@ -64,5 +64,15 @@ type GengDaemonsetList struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&GengDaemonset{}, &GengDaemonsetList{})
+	// 其实下面这段代码是，向 SchemeBuilder 中注册了一个如下函数，
+	// 然后在 main 执行 appsv1beta1.AddToScheme(scheme) 的时候，执行如下函数，从而将 GengDaemonset 类型的序列化规则 添加到 scheme 中。
+	// func(scheme *runtime.Scheme) error {
+	//		scheme.AddKnownTypes(bld.GroupVersion, object...)
+	//		metav1.AddToGroupVersion(scheme, bld.GroupVersion)
+	//		return nil
+	//	}
+	SchemeBuilder.Register(
+		&GengDaemonset{},
+		&GengDaemonsetList{},
+	)
 }

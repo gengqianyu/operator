@@ -26,10 +26,15 @@ import (
 
 var (
 	// GroupVersion 是用于注册这些对象的组版本
-	GroupVersion = schema.GroupVersion{Group: "apps.gengqianyu.io", Version: "v1beta1"}
+	GroupVersion = schema.GroupVersion{
+		Group:   "apps.gengqianyu.io",
+		Version: "v1beta1",
+	}
 
 	// SchemeBuilder 用于将 go 类型 添加到 GroupVersionKind scheme 中
-	SchemeBuilder = &scheme.Builder{GroupVersion: GroupVersion}
+	SchemeBuilder = &scheme.Builder{
+		GroupVersion: GroupVersion,
+	}
 
 	// AddToScheme 将此 group-version 中的类型添加到给定的 scheme 中。
 	AddToScheme = SchemeBuilder.AddToScheme
